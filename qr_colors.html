@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Love & Luck QR Colors</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:20px;
+ font-family:Arial,sans-serif;
+ color:white;text-align:center;
+ background:linear-gradient(135deg,#160b30,#3b1459,#10152f);
+}
+.card{
+ max-width:450px;margin:20px auto;
+ padding:22px;border-radius:20px;
+ background:#ffffff15;
+ box-shadow:0 8px 30px #0005;
+}
+h1{color:#ff8acb}
+input,select,button{
+ width:100%;padding:13px;margin:9px 0;
+ border:0;border-radius:10px;font-size:16px;
+}
+button{
+ background:#ff4eaa;color:white;
+ font-weight:bold;cursor:pointer;
+}
+#qrcode{
+ background:white;padding:15px;
+ display:inline-block;border-radius:12px;
+ margin:15px auto;
+}
+#qrcode img,#qrcode canvas{
+ max-width:100%;height:auto!important;
+}
+#qrcode.faded{opacity:.30;filter:saturate(.35)}
+.palette{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:9px;margin:12px 0;
+}
+.swatch{
+ height:42px;border:3px solid white;
+ border-radius:9px;cursor:pointer;
+}
+.note{font-size:13px;color:#ddd}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>❤️ Love & Luck QR ❤️</h1>
+<p>अपना रंगीन QR Code बनाएं</p>
+
+<input id="data" type="text"
+placeholder="अपना नाम या लिंक लिखें">
+
+<h3>QR रंग चुनें</h3>
+<div class="palette">
+<div class="swatch" style="background:#e91e63" data-color="#e91e63"></div>
+<div class="swatch" style="background:#2196f3" data-color="#2196f3"></div>
+<div class="swatch" style="background:#4caf50" data-color="#4caf50"></div>
+<div class="swatch" style="background:#9c27b0" data-color="#9c27b0"></div>
+<div class="swatch" style="background:#ff9800" data-color="#ff9800"></div>
+<div class="swatch" style="background:#111111" data-color="#111111"></div>
+<div class="swatch" style="background:#00bcd4" data-color="#00bcd4"></div>
+<div class="swatch" style="background:#c2185b" data-color="#c2185b"></div>
+</div>
+
+<select id="color">
+<option value="#e91e63">Pink</option>
+<option value="#2196f3">Blue</option>
+<option value="#4caf50">Green</option>
+<option value="#9c27b0">Purple</option>
+<option value="#ff9800">Orange</option>
+<option value="#111111">Black</option>
+<option value="#00bcd4">Cyan</option>
+<option value="#c2185b">Dark Pink</option>
+</select>
+
+<button onclick="generateQR()">Generate QR Code</button>
+
+<div id="qrcode"></div>
+
+<button onclick="toggleFade()">फीका QR Preview देखें</button>
+<button onclick="downloadQR()">Download QR</button>
+
+<p class="note">
+QR को स्कैन करने के लिए पर्याप्त Contrast रखें।
+फीका Preview केवल देखने के लिए है।
+</p>
+</div>
+
+<script>
+let currentColor="#e91e63";
+
+document.querySelectorAll(".swatch").forEach(item=>{
+ item.onclick=()=>{
+  currentColor=item.dataset.color;
+  document.getElementById("color").value=currentColor;
+ };
+});
+
+document.getElementById("color").onchange=e=>{
+ currentColor=e.target.value;
+};
+
+function generateQR(){
+ const value=document.getElementById("data").value.trim();
+ if(!value){
+  alert("पहले नाम या लिंक लिखें!");
+  return;
+ }
+ if(typeof QRCode==="undefined"){
+  alert("QR Library लोड नहीं हुई। इंटरनेट चेक करें।");
+  return;
+ }
+ const box=document.getElementById("qrcode");
+ box.innerHTML="";
+ box.classList.remove("faded");
+
+ new QRCode(box,{
+  text:value,
+  width:220,
+  height:220,
+  colorDark:currentColor,
+  colorLight:"#ffffff",
+  correctLevel:QRCode.CorrectLevel.H
+ });
+}
+
+function toggleFade(){
+ const box=document.getElementById("qrcode");
+ if(!box.hasChildNodes()){
+  alert("पहले QR बनाएं!");
+  return;
+ }
+ box.classList.toggle("faded");
+}
+
+function downloadQR(){
+ const box=document.getElementById("qrcode");
+ const canvas=box.querySelector("canvas");
+ const img=box.querySelector("img");
+ if(canvas){
+  save(canvas.toDataURL("image/png"));
+ }else if(img){
+  save(img.src);
+ }else{
+  alert("पहले QR बनाएं!");
+ }
+}
+
+function save(url){
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="love-luck-qr.png";
+ a.click();
+}
+</script>
+</body>
+</html>
