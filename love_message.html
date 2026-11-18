@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Love & Luck Message</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:25px 15px;
+ display:flex;align-items:center;justify-content:center;
+ font-family:Arial,sans-serif;color:white;text-align:center;
+ background:linear-gradient(135deg,#190b32,#79265d,#151b42);
+}
+.card{
+ width:100%;max-width:430px;padding:30px 20px;
+ background:#ffffff18;border:1px solid #ffffff35;
+ border-radius:25px;box-shadow:0 10px 35px #0005;
+}
+h1{color:#ff91c9}
+.heart{
+ font-size:55px;
+ animation:beat 1s infinite;
+}
+@keyframes beat{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.2)}
+}
+h2{color:#ffd1e9}
+#message{
+ font-size:19px;line-height:1.7;
+ white-space:pre-wrap;overflow-wrap:anywhere;
+}
+button{
+ width:100%;padding:14px;margin-top:18px;
+ border:0;border-radius:12px;
+ background:#ff43a6;color:white;
+ font-size:16px;font-weight:bold;
+}
+.glow{animation:shine 2s infinite alternate}
+@keyframes shine{
+ from{box-shadow:0 0 8px #ff43a6}
+ to{box-shadow:0 0 30px #ff43a6}
+}
+</style>
+</head>
+<body>
+<div class="card glow">
+ <h1>❤️ Love & Luck ❤️</h1>
+ <div class="heart">💖</div>
+ <h2 id="name">Welcome!</h2>
+ <div id="message">आपके जीवन में हमेशा प्यार और खुशियाँ बनी रहें। 🍀</div>
+ <button onclick="showLove()">Love Message ❤️</button>
+ <button onclick="showLuck()">Luck Message 🍀</button>
+ <p>Made with ❤️ Love & Luck QR</p>
+</div>
+
+<script>
+const params=new URLSearchParams(location.search);
+const name=params.get("name");
+const custom=params.get("msg");
+
+if(name){
+ document.getElementById("name").textContent="Dear "+name;
+}
+if(custom){
+ document.getElementById("message").textContent=custom;
+}
+
+function showLove(){
+ document.getElementById("message").textContent=
+ "आपकी जिंदगी प्यार, मुस्कान और खूबसूरत यादों से भरी रहे। ❤️";
+}
+function showLuck(){
+ document.getElementById("message").textContent=
+ "आपके हर नए दिन में सफलता, खुशियाँ और अच्छी किस्मत आए। 🍀";
+}
+</script>
+</body>
+</html>
