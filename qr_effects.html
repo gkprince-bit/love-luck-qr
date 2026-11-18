@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Love & Luck QR Effects</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:20px;text-align:center;
+ font-family:Arial;color:white;
+ background:linear-gradient(135deg,#160b30,#70265c,#10152f);
+}
+.card{
+ max-width:450px;margin:20px auto;padding:22px;
+ background:#ffffff18;border-radius:20px;
+}
+h1{color:#ff8acb}
+input,select,button{
+ width:100%;padding:14px;margin:9px 0;
+ border:0;border-radius:10px;font-size:16px;
+}
+button{background:#ff399e;color:white;font-weight:bold}
+#qrcode{
+ display:inline-block;background:white;
+ padding:15px;border-radius:12px;margin:15px;
+}
+#qrcode canvas,#qrcode img{
+ max-width:100%;height:auto!important;
+}
+.glow{animation:glow 1s infinite alternate}
+@keyframes glow{
+ from{box-shadow:0 0 5px #ff44bb}
+ to{box-shadow:0 0 30px #ff44bb,0 0 45px #ff44bb}
+}
+.heart{animation:heart 1s infinite}
+@keyframes heart{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.08)}
+}
+.rainbow{animation:rainbow 3s linear infinite}
+@keyframes rainbow{
+ from{filter:hue-rotate(0deg)}
+ to{filter:hue-rotate(360deg)}
+}
+.pulse{animation:pulse 1.5s infinite}
+@keyframes pulse{
+ 0%,100%{opacity:1}
+ 50%{opacity:.65}
+}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>✨ Love & Luck QR ✨</h1>
+<p>अपना Animated QR बनाएं</p>
+
+<input id="data" placeholder="नाम या लिंक लिखें">
+
+<select id="effect">
+<option value="glow">Glow Animation</option>
+<option value="heart">Heart Animation</option>
+<option value="rainbow">Rainbow Animation</option>
+<option value="pulse">Pulse Animation</option>
+</select>
+
+<button onclick="generate()">Generate Animated QR</button>
+
+<div id="qrcode"></div>
+
+<button onclick="downloadQR()">Download QR</button>
+
+<p>❤️ Love & Luck Forever ❤️</p>
+</div>
+
+<script>
+function generate(){
+ let value=document.getElementById("data").value.trim();
+ if(!value){alert("पहले नाम या लिंक लिखें");return;}
+ if(typeof QRCode==="undefined"){
+ alert("QR Library लोड नहीं हुई। इंटरनेट चेक करें।");
+ return;
+ }
+
+ let box=document.getElementById("qrcode");
+ box.innerHTML="";
+ box.className=document.getElementById("effect").value;
+
+ new QRCode(box,{
+ text:value,
+ width:220,
+ height:220,
+ colorDark:"#111111",
+ colorLight:"#ffffff",
+ correctLevel:QRCode.CorrectLevel.H
+ });
+}
+
+function downloadQR(){
+ let box=document.getElementById("qrcode");
+ let canvas=box.querySelector("canvas");
+ let img=box.querySelector("img");
+ let url=canvas?canvas.toDataURL("image/png"):img?img.src:null;
+ if(!url){alert("पहले QR बनाएं");return;}
+ let a=document.createElement("a");
+ a.href=url;
+ a.download="love-luck-animation-qr.png";
+ a.click();
+}
+</script>
+</body>
+</html>
