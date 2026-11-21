@@ -54,8 +54,9 @@ button{
 <h1>❤️ Love & Luck QR ❤️</h1>
 <p>अपना रंगीन QR Code बनाएं</p>
 
-<input id="data" type="text"
-placeholder="अपना नाम या लिंक लिखें">
+<input id="name" type="text" placeholder="अपना नाम लिखें">
+
+<input id="msg" type="text" placeholder="अपना मैसेज लिखें">
 
 <h3>QR रंग चुनें</h3>
 <div class="palette">
@@ -108,11 +109,15 @@ document.getElementById("color").onchange=e=>{
 };
 
 function generateQR(){
- const value=document.getElementById("data").value.trim();
- if(!value){
-  alert("पहले नाम या लिंक लिखें!");
-  return;
- }
+ const name=document.getElementById("name").value.trim();
+const msg=document.getElementById("msg").value.trim();
+
+if(!name || !msg){
+alert("पहले नाम और मैसेज लिखें!");
+return;
+}
+
+const value="https://gkprince-bit.github.io/love-luck-qr/love_message.html?name="+encodeURIComponent(name)+"&msg="+encodeURIComponent(msg);
  if(typeof QRCode==="undefined"){
   alert("QR Library लोड नहीं हुई। इंटरनेट चेक करें।");
   return;
