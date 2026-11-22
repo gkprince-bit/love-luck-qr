@@ -123,6 +123,14 @@ footer {
 <footer>
   Made with ❤️ | Love & Luck QR Generator
 </footer>
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("Offline mode ready"))
+      .catch(error => console.log("Service Worker error:", error));
+  });
+}
+</script>
 </body>
 </html>
