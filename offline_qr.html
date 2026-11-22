@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love & Luck Offline QR</title>
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(135deg,#ffe0ec,#e0e7ff);
+  padding: 20px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  max-width: 400px;
+  margin: auto;
+}
+input, select, button {
+  padding: 12px;
+  margin: 8px;
+  width: 90%;
+  border-radius: 9px;
+  border: 1px solid #ccc;
+}
+button {
+  background: #e91e63;
+  color: white;
+  border: none;
+}
+#qrcode {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>❤️ Love & Luck QR ❤️</h2>
+<p>अपना नाम या लिंक लिखें</p>
+<input id="data" placeholder="नाम या लिंक लिखें">
+
+<select id="color">
+<option value="#e91e63">Pink</option>
+<option value="#000000">Black</option>
+<option value="#0000ff">Blue</option>
+<option value="#008000">Green</option>
+</select>
+
+<button onclick="generateQR()">Generate QR</button>
+<div id="qrcode"></div>
+<button onclick="downloadQR()">Download QR</button>
+</div>
+
+<script src="qrcode.min.js"></script>
+<script>
+function generateQR() {
+  const value = document.getElementById("data").value.trim();
+  const color = document.getElementById("color").value;
+
+  if (!value) {
+    alert("पहले नाम या लिंक लिखें!");
+    return;
+  }
+
+  document.getElementById("qrcode").innerHTML = "";
+
+  new QRCode(document.getElementById("qrcode"), {
+    text: value,
+    width: 220,
+    height: 220,
+    colorDark: color,
+    colorLight: "#ffffff"
+  });
+}
+
+function downloadQR() {
+  const qr = document.querySelector("#qrcode canvas");
+  if (!qr) {
+    alert("पहले QR बनाएं!");
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.download = "love-luck-qr.png";
+  link.href = qr.toDataURL();
+  link.click();
+}
+</script>
+</body>
+</html>
