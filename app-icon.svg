@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ff4d88"/>
+    <stop offset="100%" stop-color="#7545e8"/>
+  </linearGradient>
+</defs>
+<rect width="512" height="512" rx="100" fill="url(#bg)"/>
+<path d="M256 390 C210 345 105 270 145 190 C175 130 235 155 256 205 C277 155 337 130 367 190 C407 270 302 345 256 390Z" fill="white"/>
+<text x="256" y="455" text-anchor="middle" font-size="38" font-weight="bold" fill="white">LOVE & LUCK</text>
+</svg>
