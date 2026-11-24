@@ -2,6 +2,8 @@ const CACHE_NAME = "love-luck-v1";
 
 const FILES_TO_CACHE = [
   "./",
+  "./manifest.json",
+"./app-icon.svg",
   "./index.html",
   "./qr_designs.html",
   "./qr_colors.html",
