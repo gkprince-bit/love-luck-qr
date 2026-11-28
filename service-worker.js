@@ -1,4 +1,4 @@
-const CACHE_NAME = "love-luck-v1";
+
 const CACHE_NAME = "love-luck-v2";
 const FILES_TO_CACHE = [
   "./",
