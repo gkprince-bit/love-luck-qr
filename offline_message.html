@@ -46,6 +46,15 @@ h1 {
 <body>
 <div class="card">
 <h1>Love & Luck</h1>
+  <input id="inputName" type="text" placeholder="अपना नाम लिखें">
+
+<br><br>
+
+<input id="inputMessage" type="text" placeholder="अपना मैसेज लिखें">
+
+<br><br>
+
+<button onclick="showMessage()">Show Message</button>
 <div class="heart">❤️</div>
 <h2 id="name">आपके लिए</h2>
 <p id="message">आप बहुत खास हैं!</p>
@@ -56,6 +65,13 @@ document.getElementById("name").textContent =
   params.get("name") || "आपके लिए";
 document.getElementById("message").textContent =
   params.get("msg") || "आप बहुत खास हैं!";
+  function showMessage(){
+  const name = document.getElementById("inputName").value.trim();
+  const msg = document.getElementById("inputMessage").value.trim();
+
+  document.getElementById("name").textContent = name || "आपके लिए";
+  document.getElementById("message").textContent = msg || "आप बहुत खास हैं!";
+  }
 </script>
 </body>
 </html>
